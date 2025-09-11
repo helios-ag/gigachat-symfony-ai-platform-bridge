@@ -1,0 +1,81 @@
+{
+  "name": "helios-ag/gigachat-symfony-ai-platform-bridge",
+  "description": "Adds gigachat support to Symfony",
+  "keywords": ["ai", "gigachat", "symfony", "sber"],
+  "type": "lib",
+  "homepage": "https://github.com/helios-ag/gigachat-symfony-ai-platform-bridge",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Al Ganiev",
+      "email": "helios.ag@gmail.com"
+    },
+    {
+      "name": "Symfony Community",
+      "homepage": "https://github.com/helios-ag/gigachat-symfony-ai-platform-bridge/contributors"
+    }
+  ],
+  "archive": {
+    "exclude": ["/tests", "./github"]
+  },
+  "require": {
+    "php": ">=8.2",
+    "oskarstark/enum-helper": "^1.5",
+    "phpdocumentor/reflection-docblock": "^5.4",
+    "phpstan/phpdoc-parser": "^2.1",
+    "psr/log": "^3.0",
+    "symfony/clock": "^6.4 || ^7.1",
+    "symfony/http-client": "^6.4 || ^7.1",
+    "symfony/property-access": "^6.4 || ^7.1",
+    "symfony/property-info": "^6.4 || ^7.1",
+    "symfony/serializer": "^6.4 || ^7.1",
+    "symfony/type-info": "^7.2.3",
+    "symfony/uid": "^6.4 || ^7.1"
+  },
+  "require-dev": {
+    "async-aws/bedrock-runtime": "^0.1.0",
+    "google/auth": "^1.47",
+    "phpstan/phpstan": "^2.1.17",
+    "phpstan/phpstan-symfony": "^2.0.6",
+    "phpunit/phpunit": "^11.5",
+    "symfony/ai-agent": "@dev",
+    "symfony/console": "^6.4 || ^7.1",
+    "symfony/dotenv": "^6.4 || ^7.1",
+    "symfony/event-dispatcher": "^6.4 || ^7.1",
+    "symfony/finder": "^6.4 || ^7.1",
+    "symfony/process": "^6.4 || ^7.1",
+    "symfony/var-dumper": "^6.4 || ^7.1"
+  },
+  "suggest": {
+    "symfony/ai-platform": "Symfony AI Platform integration"
+  },
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "symfony/doctrine-bridge": "source",
+      "*": "dist"
+    },
+    "allow-plugins": {
+      "composer/installers": true,
+      "composer/package-versions-deprecated": true,
+      "oomphinc/composer-installers-extender": true
+    }
+  },
+  "autoload": {
+    "psr-4": { "FM\\AI\\Platform\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "FM\\AI\\Platform\\Tests\\": "tests/" }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd"
+    }
+  }
+}
