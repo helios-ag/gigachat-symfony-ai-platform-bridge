@@ -1,14 +1,10 @@
 # GigaChat Symfony AI Platform Bridge
 
-A Symfony bundle for integrating the GigaChat AI platform into your Symfony applications.
-
-## Overview
-
-This package serves as a bridge between your Symfony-based PHP application and the [GigaChat](https://giga.chat/) AI platform—a powerful Russian language-focused large language model based on Mixture of Experts (MoE) architecture. With this bridge, you can seamlessly connect your app to GigaChat's APIs, leveraging advanced natural language processing capabilities for chatbots, content generation, support, and more.
+This is library that provides a bridge between your Symfony-based PHP application and the [GigaChat](https://developers.sber.ru/docs/ru/gigachat/api/main) AI platform.
 
 ## Features
 
-- Easy integration with Symfony applications
+- Easy integration with Symfony or any other modern PHP applications
 - Service container configuration for GigaChat API credentials
 - Built-in support for authentication and secure API calls
 - Helper services for sending prompts and handling responses
