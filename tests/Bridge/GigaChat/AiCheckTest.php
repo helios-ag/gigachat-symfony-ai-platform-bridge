@@ -3,7 +3,6 @@
 namespace FM\AI\Platform\Tests\Bridge\GigaChat;
 
 use FM\AI\Platform\Bridge\GigaChat\AiCheck;
-use FM\AI\Platform\Bridge\GigaChat\Embeddings;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +23,7 @@ final class AiCheckTest extends TestCase
     {
         $aicheck = new AiCheck(AiCheck::GIGACHECKDETECTION, ['dimensions' => 256]);
 
-        $this->assertSame(Embeddings::EMBEDDINGSGIGAR, $aicheck->getName());
+        $this->assertSame(AiCheck::GIGACHECKDETECTION, $aicheck->getName());
         $this->assertSame(['dimensions' => 256], $aicheck->getOptions());
     }
 
