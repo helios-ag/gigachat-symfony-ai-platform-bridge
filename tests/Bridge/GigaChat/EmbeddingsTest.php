@@ -2,38 +2,29 @@
 
 namespace FM\AI\Platform\Tests\Bridge\GigaChat;
 
-use FM\AI\Platform\Bridge\GigaChat\PlatformFactory;
+use FM\AI\Platform\Bridge\GigaChat\Embeddings;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
-use Symfony\AI\Platform\Platform;
-use Symfony\Component\HttpClient\EventSourceHttpClient;
-use Symfony\Component\HttpClient\MockHttpClient;
 
-#[CoversClass(PlatformFactory::class)]
+#[CoversClass(Embeddings::class)]
 #[Small]
 final class EmbeddingsTest extends TestCase
 {
-    public function testItCreatesPlatformWithDefaultSettings(): void
+    public function testItCreatesEmbeddingsWithDefaultSettings(): void
     {
-        $platform = PlatformFactory::create('test-api-key');
+        $embeddings = new Embeddings();
 
-        $this->assertInstanceOf(Platform::class, $platform);
+        $this->assertSame(Embeddings::EMBEDDINGS, $embeddings->getName());
+        $this->assertSame([], $embeddings->getOptions());
     }
 
-    public function testItCreatesPlatformWithCustomHttpClient(): void
+    public function testItCreatesEmbeddingsWithCustomSettings(): void
     {
-        $httpClient = new MockHttpClient();
-        $platform = PlatformFactory::create('test-api-key', $httpClient);
+        $embeddings = new Embeddings(Embeddings::EMBEDDINGSGIGAR, ['dimensions' => 256]);
 
-        $this->assertInstanceOf(Platform::class, $platform);
+        $this->assertSame(Embeddings::EMBEDDINGSGIGAR, $embeddings->getName());
+        $this->assertSame(['dimensions' => 256], $embeddings->getOptions());
     }
 
-    public function testItCreatesPlatformWithEventSourceHttpClient(): void
-    {
-        $httpClient = new EventSourceHttpClient(new MockHttpClient());
-        $platform = PlatformFactory::create('sk-test-api-key', $httpClient);
-
-        $this->assertInstanceOf(Platform::class, $platform);
-    }
 }
