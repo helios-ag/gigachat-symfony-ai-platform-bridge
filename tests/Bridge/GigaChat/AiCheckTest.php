@@ -14,18 +14,18 @@ final class AiCheckTest extends TestCase
 {
     public function testItCreatesAiCheckWithDefaultSettings(): void
     {
-        $embeddings = new Embeddings();
+        $aicheck = new AiCheck();
 
-        $this->assertSame(AiCheck::GIGACHECKCLASSIFICATION, $embeddings->getName());
-        $this->assertSame([], $embeddings->getOptions());
+        $this->assertSame(AiCheck::GIGACHECKCLASSIFICATION, $aicheck->getName());
+        $this->assertSame([], $aicheck->getOptions());
     }
 
     public function testItCreatesAiCheckWithCustomSettings(): void
     {
-        $embeddings = new Embeddings(AiCheck::GIGACHECKDETECTION, ['dimensions' => 256]);
+        $aicheck = new AiCheck(AiCheck::GIGACHECKDETECTION, ['dimensions' => 256]);
 
-        $this->assertSame(Embeddings::EMBEDDINGSGIGAR, $embeddings->getName());
-        $this->assertSame(['dimensions' => 256], $embeddings->getOptions());
+        $this->assertSame(Embeddings::EMBEDDINGSGIGAR, $aicheck->getName());
+        $this->assertSame(['dimensions' => 256], $aicheck->getOptions());
     }
 
 }
