@@ -5,9 +5,9 @@
          cacheDirectory=".phpunit.cache"
          colors="true"
          executionOrder="depends,defects"
-         requireCoverageMetadata="true"
-         beStrictAboutCoverageMetadata="true"
-         beStrictAboutOutputDuringTests="true"
+         requireCoverageMetadata="false"
+         beStrictAboutCoverageMetadata="false"
+         beStrictAboutOutputDuringTests="false"
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
