@@ -22,11 +22,13 @@ final readonly class PlatformFactory
                 new AiCheck\ModelClient($httpClient, $apiKey),
                 new Gpt\ModelClient($httpClient, $apiKey),
                 new Embeddings\ModelClient($httpClient, $apiKey),
+                new Tokens\ModelClient($httpClient, $apiKey),
             ],
             [
                 new AiCheck\ResultConverter(),
                 new Gpt\ResultConverter(),
                 new Embeddings\ResultConverter(),
+                new Tokens\ResultConverter(),
         ],
             $contract ?? GigaChatContract::create(),
         );
