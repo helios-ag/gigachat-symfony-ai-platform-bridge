@@ -33,7 +33,7 @@ jobs:
       - name: 'Install project dependencies'
         run: |
           composer update --no-interaction --prefer-dist --optimize-autoloader --prefer-stable
-          vendor/bin/simple-phpunit install
+          vendor/bin/phpunit
       - name: 'Run tests'
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover ./coverage.xml
       - name: codecov
