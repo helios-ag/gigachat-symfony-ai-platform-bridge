@@ -16,9 +16,8 @@ This package serves as a bridge between your Symfony-based PHP application and t
 
 ## Requirements
 
-- PHP (version compatible with Symfony 5 or 6)
-- Symfony Framework
-- GigaChat API credentials (Client ID, Secret, Scope)
+- At least PHP 8.2
+- GigaChat API credentials (Client ID, Client Secret, Scope)
 
 ## Installation
 
@@ -36,22 +35,13 @@ GIGACHAT_CLIENT_SECRET=your_client_secret
 GIGACHAT_CLIENT_SCOPE=your_scope
 ```
 
-Register and configure the bundle in your `config/bundles.php` and `config/packages/gigachat_bridge.yaml` as appropriate.
-
 ## Usage Example
 
-Inject the GigaChat client service into your controller or service and use it to send prompts:
-
-```php
-// Example Symfony service usage (pseudo-code)
-$gigachatClient = $container->get(GigaChat\Client::class);
-$response = $gigachatClient->sendPrompt('Привет, расскажи о себе!');
-echo $response->getText();
-```
+Check the [example](/example) directory for more details.
 
 ## About GigaChat
 
-GigaChat is a large Russian-language model developed with Mixture of Experts architecture (GPT-3, 13B parameters). It is designed for efficient language modeling and powers chatbots, content assistants, and more. More information: [arXiv paper](https://doi.org/10.48550/arXiv.2506.09440).
+https://developers.sber.ru/docs/ru/gigachat/api/main
 
 ## License
 
@@ -59,10 +49,8 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ## Links
 
-- [GigaChat Official Site](https://giga.chat/)
+- [GigaChat API Docs](https://developers.sber.ru/docs/ru/gigachat/api/main)
 - [Symfony](https://symfony.com/)
 - [Repository](https://github.com/helios-ag/gigachat-symfony-ai-platform-bridge)
 
 ---
-
-> _Note: This README was generated based on available repository metadata and typical usage for Symfony bridges. Please update with specific details and code examples from your implementation as needed._
