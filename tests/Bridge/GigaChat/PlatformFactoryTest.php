@@ -2,6 +2,7 @@
 
 namespace FM\AI\Platform\Tests\Bridge\GigaChat;
 
+use FM\AI\Platform\Bridge\GigaChat\Contract\GigaChatContract;
 use FM\AI\Platform\Bridge\GigaChat\PlatformFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Small;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpClient\EventSourceHttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
 
 #[CoversClass(PlatformFactory::class)]
+#[CoversClass(GigaChatContract::class)]
 #[Small]
 final class PlatformFactoryTest extends TestCase
 {
