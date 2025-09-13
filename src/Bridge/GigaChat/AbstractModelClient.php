@@ -9,7 +9,7 @@ abstract readonly class AbstractModelClient
 {
     protected static function getBaseUrl(): string
     {
-        return 'https://gigachat.devices.sberbank.ru/api/v1/';
+        return 'https://gigachat.devices.sberbank.ru/api';
 
     }
 
