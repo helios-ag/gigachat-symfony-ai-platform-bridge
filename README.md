@@ -1,12 +1,12 @@
 # GigaChat Symfony AI Platform Bridge
+[![Tests](https://github.com/helios-ag/gigachat-symfony-ai-platform-bridge/actions/workflows/tests.yaml/badge.svg)](https://github.com/helios-ag/gigachat-symfony-ai-platform-bridge/actions/workflows/tests.yaml)
+
 
 This is library that provides a bridge between your Symfony-based PHP application and the [GigaChat](https://developers.sber.ru/docs/ru/gigachat/api/main) AI platform.
 
 ## Features
 
 - Easy integration with Symfony or any other modern PHP applications
-- Service container configuration for GigaChat API credentials
-- Built-in support for authentication and secure API calls
 - Helper services for sending prompts and handling responses
 - MIT License
 
