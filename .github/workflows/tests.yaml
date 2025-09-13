@@ -31,9 +31,7 @@ jobs:
           ini-values: date.timezone=UTC
 
       - name: 'Install project dependencies'
-        run: |
-          composer update --no-interaction --prefer-dist --optimize-autoloader --prefer-stable
-          vendor/bin/phpunit
+        run: composer update --no-interaction --prefer-dist --optimize-autoloader --prefer-stable
       - name: 'Run tests'
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover ./coverage.xml
       - name: codecov
