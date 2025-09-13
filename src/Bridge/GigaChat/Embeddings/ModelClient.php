@@ -3,7 +3,7 @@
 namespace FM\AI\Platform\Bridge\GigaChat\Embeddings;
 
 use FM\AI\Platform\Bridge\GigaChat\AbstractModelClient;
-use Symfony\AI\Platform\Bridge\OpenAi\Embeddings;
+use FM\AI\Platform\Bridge\GigaChat\Embeddings;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\ModelClientInterface;
 use Symfony\AI\Platform\Result\RawHttpResult;
