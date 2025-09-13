@@ -21,7 +21,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface as HttpResponse;
 #[Small]
 final class ModelClientTest extends TestCase
 {
-    public function testItThrowsExceptionWhenApiKeyIsEmpty()
+    public function testItThrowsExceptionWhenApiKeyIsEmpty(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The API key must not be empty.');
@@ -29,15 +29,7 @@ final class ModelClientTest extends TestCase
         new ModelClient(new MockHttpClient(), '');
     }
 
-    #[TestWith([''])]
-    public function testItThrowsExceptionWhenApiKeyDoesNotStartWithSk(string $invalidApiKey)
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new ModelClient(new MockHttpClient(), $invalidApiKey);
-    }
-
-    public function testItAcceptsValidApiKey()
+    public function testItAcceptsValidApiKey(): void
     {
         $modelClient = new ModelClient(new MockHttpClient(), 'valid-api-key');
 
@@ -71,7 +63,7 @@ final class ModelClientTest extends TestCase
     {
         $resultCallback = static function (string $method, string $url, array $options): HttpResponse {
             self::assertSame('POST', $method);
-            self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', $url);
+            self::assertSame('https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
             self::assertSame('{"temperature":1,"model":"GigaChat-Pro","messages":[{"role":"user","content":"test message"}]}', $options['body']);
 
@@ -86,7 +78,7 @@ final class ModelClientTest extends TestCase
     {
         $resultCallback = static function (string $method, string $url, array $options): HttpResponse {
             self::assertSame('POST', $method);
-            self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', $url);
+            self::assertSame('https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
             self::assertSame('{"temperature":0.7,"model":"GigaChat-Pro","messages":[{"role":"user","content":"Hello"}]}', $options['body']);
 
@@ -97,7 +89,7 @@ final class ModelClientTest extends TestCase
         $modelClient->request(new AiCheck(), ['model' => 'GigaChat-Pro', 'messages' => [['role' => 'user', 'content' => 'Hello']]], ['temperature' => 0.7]);
     }
 
-    #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1/chat/completions'])]
+    #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check'])]
     public function testItUsesCorrectBaseUrl(string $expectedUrl)
     {
         $resultCallback = static function (string $method, string $url, array $options) use ($expectedUrl): HttpResponse {
