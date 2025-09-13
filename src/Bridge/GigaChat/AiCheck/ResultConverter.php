@@ -19,6 +19,6 @@ final class ResultConverter implements ResultConverterInterface
     {
         $data = $result->getData();
 
-        return new ObjectResult(BatchResult::fromArray($data));
+        return new ObjectResult(AiCheckResult::fromArray($data));
     }
 }

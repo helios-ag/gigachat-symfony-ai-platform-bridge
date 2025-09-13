@@ -65,7 +65,7 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":1,"model":"GigaChat-Pro","messages":[{"role":"user","content":"test message"}]}', $options['body']);
+            self::assertSame('{"temperature":1,"model":"GigaCheckClassification","messages":[{"role":"user","content":"test message"}]}', $options['body']);
 
             return new MockResponse();
         };
@@ -80,7 +80,7 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":0.7,"model":"GigaChat-Pro","messages":[{"role":"user","content":"Hello"}]}', $options['body']);
+            self::assertSame('{"temperature":0.7,"model":"GigaCheckClassification","messages":[{"role":"user","content":"Hello"}]}', $options['body']);
 
             return new MockResponse();
         };
@@ -89,7 +89,7 @@ final class ModelClientTest extends TestCase
         $modelClient->request(new AiCheck(), ['model' => 'GigaChat-Pro', 'messages' => [['role' => 'user', 'content' => 'Hello']]], ['temperature' => 0.7]);
     }
 
-    #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1//v1/ai/check'])]
+    #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1/ai/check'])]
     public function testItUsesCorrectBaseUrl(string $expectedUrl)
     {
         $resultCallback = static function (string $method, string $url, array $options) use ($expectedUrl): HttpResponse {
