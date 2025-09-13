@@ -63,13 +63,13 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/tokens/count', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":1,"model":"GigaChat-pro","messages":[{"role":"user","content":"test message"}]}', $options['body']);
+            self::assertSame('{"model":"GigaChat-2","input":"test message"}', $options['body']);
 
             return new MockResponse();
         };
         $httpClient = new MockHttpClient([$resultCallback]);
         $modelClient = new ModelClient($httpClient, 'api-key');
-        $modelClient->request(new GigaChat(), ['model' => 'GigaChat-pro', 'messages' => [['role' => 'user', 'content' => 'test message']]], ['temperature' => 1]);
+        $modelClient->request(new GigaChat(), 'test message');
     }
 
     public function testItIsExecutingTheCorrectRequestWithArrayPayload(): void
@@ -78,13 +78,13 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/tokens/count', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":0.7,"model":"GigaChat-pro","messages":[{"role":"user","content":"Hello"}]}', $options['body']);
+            self::assertSame('{"model":"GigaChat-2","input":"Hello"}', $options['body']);
 
             return new MockResponse();
         };
         $httpClient = new MockHttpClient([$resultCallback]);
         $modelClient = new ModelClient($httpClient, 'api-key');
-        $modelClient->request(new GigaChat(), ['model' => 'GigaChat-pro', 'messages' => [['role' => 'user', 'content' => 'Hello']]], ['temperature' => 0.7]);
+        $modelClient->request(new GigaChat(), 'Hello');
     }
 
     #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1/tokens/count'])]

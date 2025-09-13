@@ -65,13 +65,13 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":1,"model":"GigaCheckClassification","input":[{"role":"user","content":"test message"}]}', $options['body']);
+            self::assertSame('{"model":"GigaCheckClassification","input":"test message"}', $options['body']);
 
             return new MockResponse();
         };
         $httpClient = new MockHttpClient([$resultCallback]);
         $modelClient = new ModelClient($httpClient, 'api-key');
-        $modelClient->request(new AiCheck(), ['model' => 'GigaCheckClassification', 'input' => [['role' => 'user', 'content' => 'test message']]], ['temperature' => 1]);
+        $modelClient->request(new AiCheck(), 'test message');
     }
 
     public function testItIsExecutingTheCorrectRequestWithArrayPayload()
@@ -80,13 +80,13 @@ final class ModelClientTest extends TestCase
             self::assertSame('POST', $method);
             self::assertSame('https://gigachat.devices.sberbank.ru/api/v1/ai/check', $url);
             self::assertSame('Authorization: Bearer api-key', $options['normalized_headers']['authorization'][0]);
-            self::assertSame('{"temperature":0.7,"model":"GigaCheckClassification","messages":[{"role":"user","content":"Hello"}]}', $options['body']);
+            self::assertSame('{"model":"GigaCheckClassification","input":"Hello"}', $options['body']);
 
             return new MockResponse();
         };
         $httpClient = new MockHttpClient([$resultCallback]);
         $modelClient = new ModelClient($httpClient, 'api-key');
-        $modelClient->request(new AiCheck(), ['model' => 'GigaCheckClassification', 'messages' => [['role' => 'user', 'content' => 'Hello']]], ['temperature' => 0.7]);
+        $modelClient->request(new AiCheck(), 'Hello');
     }
 
     #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1/ai/check'])]
@@ -101,6 +101,6 @@ final class ModelClientTest extends TestCase
         };
         $httpClient = new MockHttpClient([$resultCallback]);
         $modelClient = new ModelClient($httpClient, 'api-key',);
-        $modelClient->request(new AiCheck(), ['messages' => []]);
+        $modelClient->request(new AiCheck(), ['input' => 'test message']);
     }
 }
