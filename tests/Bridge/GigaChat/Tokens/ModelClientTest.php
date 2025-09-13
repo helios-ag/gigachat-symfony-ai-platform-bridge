@@ -88,7 +88,7 @@ final class ModelClientTest extends TestCase
     }
 
     #[TestWith(['https://gigachat.devices.sberbank.ru/api/v1/tokens/count'])]
-    public function testItUsesCorrectBaseUrl(?string $region, string $expectedUrl)
+    public function testItUsesCorrectBaseUrl(?string $region, string $expectedUrl): void
     {
         $resultCallback = static function (string $method, string $url, array $options) use ($expectedUrl): HttpResponse {
             self::assertSame('POST', $method);
@@ -98,7 +98,7 @@ final class ModelClientTest extends TestCase
             return new MockResponse();
         };
         $httpClient = new MockHttpClient([$resultCallback]);
-        $modelClient = new ModelClient($httpClient, 'api-key', $region);
+        $modelClient = new ModelClient($httpClient, 'api-key');
         $modelClient->request(new GigaChat(), ['messages' => []], []);
     }
 }
