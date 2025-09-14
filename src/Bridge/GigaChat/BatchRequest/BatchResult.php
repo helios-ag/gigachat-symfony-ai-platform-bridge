@@ -5,24 +5,35 @@ namespace FM\AI\Platform\Bridge\GigaChat\BatchRequest;
 final class BatchResult
 {
     public function __construct(
-        public string $category,
-        public int    $characters,
-        public int    $tokens,
-        public array  $aiIntervals,
+        public string $id,
+        public string $method,
+        public string $status,
+        public object $requestCounts,
+        public string $createdAt,
+        public string $updatedAt,
     )
     {
     }
 
     /**
-     * @param array{category: string, characters: int, tokens: int, ai_intervals: array<array<int>} $data
+     * @param array{
+     *     id: string,
+     *     method: string,
+     *     status: string,
+     *     request_counts: object{array{total: int}},
+     *     created_at: string,
+     *     updated_at: string
+     * } $data
      */
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['category'],
-            $data['characters'],
-            $data['tokens'],
-            $data['ai_intervals'],
+            $data['id'],
+            $data['method'],
+            $data['status'],
+            fn(int $total): object => (object)['request_counts' => (object)['array' => ['total' => $total]]],
+            $data['created_at'],
+            $data['updated_at'],
         );
     }
 }
