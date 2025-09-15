@@ -25,8 +25,29 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
 
     public function request(Model $model, array|string $payload, array $options = []): RawHttpResult
     {
-        return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/files', [
-            'auth_bearer' => $this->apiKey,
-        ]));
+        $task = $options['task'] ?? Task::FILE_LIST;
+        switch ($task) {
+            case Task::FILE_DELETE:
+                return new RawHttpResult($this->httpClient->request('POST', sprintf("%s/v1/files/%s/delete", self::getBaseUrl(), $payload), [
+                    'auth_bearer' => $this->apiKey,
+                ]));
+            case Task::FILE_UPLOAD:
+                return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/files', [
+                    'auth_bearer' => $this->apiKey,
+                    'headers' => [
+                        'Content-Type' => 'multipart/form-data',
+                    ],
+                    'body' => array_merge($options, $payload),
+                ]));
+            case Task::FILE_INFO:
+                return new RawHttpResult($this->httpClient->request('GET', sprintf("%s/v1/files/%s", self::getBaseUrl(), $payload), [
+                    'auth_bearer' => $this->apiKey,
+                ]));
+            default:
+                return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/files', [
+                    'auth_bearer' => $this->apiKey,
+                ]));
+        }
     }
 }
+
