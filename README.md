@@ -23,13 +23,7 @@ composer require helios-ag/gigachat-symfony-ai-platform-bridge
 
 ## Configuration
 
-Add your GigaChat credentials to your Symfony environment variables (`.env`):
-
-```dotenv
-GIGACHAT_CLIENT_ID=your_client_id
-GIGACHAT_CLIENT_SECRET=your_client_secret
-GIGACHAT_CLIENT_SCOPE=your_scope
-```
+Obtain your credentials from the [GigaChat](https://developers.sber.ru/docs/ru/gigachat/api/overview) developer portal.
 
 ## Usage Example
 
