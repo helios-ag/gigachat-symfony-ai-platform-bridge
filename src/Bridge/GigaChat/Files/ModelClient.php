@@ -3,7 +3,6 @@
 namespace FM\AI\Platform\Bridge\GigaChat\Files;
 
 use FM\AI\Platform\Bridge\GigaChat\AbstractModelClient;
-use FM\AI\Platform\Bridge\GigaChat\GigaChat;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\ModelClientInterface;
 use Symfony\AI\Platform\Result\RawHttpResult;
@@ -20,34 +19,30 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
 
     public function supports(Model $model): bool
     {
-        return $model instanceof GigaChat;
+        return true;
     }
 
     public function request(Model $model, array|string $payload, array $options = []): RawHttpResult
     {
         $task = $options['task'] ?? Task::FILE_LIST;
-        switch ($task) {
-            case Task::FILE_DELETE:
-                return new RawHttpResult($this->httpClient->request('POST', sprintf("%s/v1/files/%s/delete", self::getBaseUrl(), $payload), [
-                    'auth_bearer' => $this->apiKey,
-                ]));
-            case Task::FILE_UPLOAD:
-                return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/files', [
-                    'auth_bearer' => $this->apiKey,
-                    'headers' => [
-                        'Content-Type' => 'multipart/form-data',
-                    ],
-                    'body' => array_merge($options, $payload),
-                ]));
-            case Task::FILE_INFO:
-                return new RawHttpResult($this->httpClient->request('GET', sprintf("%s/v1/files/%s", self::getBaseUrl(), $payload), [
-                    'auth_bearer' => $this->apiKey,
-                ]));
-            default:
-                return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/files', [
-                    'auth_bearer' => $this->apiKey,
-                ]));
-        }
+        return match ($task) {
+            Task::FILE_DELETE => new RawHttpResult($this->httpClient->request('POST', sprintf("%s/v1/files/%s/delete", self::getBaseUrl(), $payload), [
+                'auth_bearer' => $this->apiKey,
+            ])),
+            Task::FILE_UPLOAD => new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl() . '/v1/files', [
+                'auth_bearer' => $this->apiKey,
+                'headers' => [
+                    'Content-Type' => 'multipart/form-data',
+                ],
+                'body' => array_merge($options, $payload),
+            ])),
+            Task::FILE_INFO => new RawHttpResult($this->httpClient->request('GET', sprintf("%s/v1/files/%s", self::getBaseUrl(), $payload), [
+                'auth_bearer' => $this->apiKey,
+            ])),
+            default => new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl() . '/v1/files', [
+                'auth_bearer' => $this->apiKey,
+            ])),
+        };
     }
 }
 
