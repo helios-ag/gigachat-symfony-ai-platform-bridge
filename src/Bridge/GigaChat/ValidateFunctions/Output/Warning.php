@@ -12,13 +12,13 @@ final class Warning
     }
 
     /**
-     * @param array{description: string, schemaLocation: string} $data
+     * @param array{description: string, schema_location: string} $data
      */
     public static function fromArray(array $data): self
     {
         return new self(
             $data['description'],
-            $data['schemaLocation'],
+            $data['schema_location'],
         );
     }
 }
