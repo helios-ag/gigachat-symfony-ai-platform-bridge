@@ -20,7 +20,7 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
 
     public function supports(Model $model): bool
     {
-        return $model instanceof AiCheck;
+        return true;
     }
 
     public function request(Model $model, array|string $payload, array $options = []): RawHttpResult
