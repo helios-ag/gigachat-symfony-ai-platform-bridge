@@ -27,10 +27,7 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
     {
         return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/functions/validate', [
             'auth_bearer' => $this->apiKey,
-            'json' => array_merge($options, [
-                'model' => $model->getName(),
-                'input' => $payload,
-            ]),
+            'json' => array_merge($options, $payload),
         ]));
     }
 }
