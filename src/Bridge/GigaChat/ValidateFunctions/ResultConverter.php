@@ -2,7 +2,6 @@
 
 namespace FM\AI\Platform\Bridge\GigaChat\ValidateFunctions;
 
-use FM\AI\Platform\Bridge\GigaChat\AiCheck;
 use Symfony\AI\Platform\Model;
 use Symfony\AI\Platform\Result\ObjectResult;
 use Symfony\AI\Platform\Result\RawResultInterface;
@@ -12,7 +11,7 @@ final class ResultConverter implements ResultConverterInterface
 {
     public function supports(Model $model): bool
     {
-        return $model instanceof AiCheck;
+        return true;
     }
 
     public function convert(RawResultInterface $result, array $options = []): ObjectResult
