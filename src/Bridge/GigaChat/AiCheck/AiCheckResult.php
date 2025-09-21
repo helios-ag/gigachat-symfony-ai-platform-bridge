@@ -4,6 +4,9 @@ namespace FM\AI\Platform\Bridge\GigaChat\AiCheck;
 
 final class AiCheckResult
 {
+    /**
+     * @param list<list{int,int}> $aiIntervals
+     */
     public function __construct(
         public string $category,
         public int    $characters,
@@ -14,7 +17,12 @@ final class AiCheckResult
     }
 
     /**
-     * @param array{category: string, characters: int, tokens: int, ai_intervals: array<array<int>} $data
+     * @param array{
+     *     category: string,
+     *     characters: int,
+     *     tokens: int,
+     *     ai_intervals: list<list{int,int}>
+     * } $data
      */
     public static function fromArray(array $data): self
     {
