@@ -18,7 +18,7 @@ final class ValidateFunctionsResult
     }
 
     /**
-     * @param array{status: int, message: string, json_ai_rules_version: string, errors: array<Error>, warnings: array<Warning>} $data
+     * @param array{status: int, message: string, json_ai_rules_version: string, errors: array<string, string>, warnings: array<string, string>} $data
      */
     public static function fromArray(array $data): self
     {

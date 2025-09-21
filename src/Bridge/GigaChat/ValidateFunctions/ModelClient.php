@@ -25,6 +25,9 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
 
     public function request(Model $model, array|string $payload, array $options = []): RawHttpResult
     {
+        if (!is_array($payload)) {
+            throw new \InvalidArgumentException('Payload must be an array');
+        }
         return new RawHttpResult($this->httpClient->request('POST', self::getBaseUrl().'/v1/functions/validate', [
             'auth_bearer' => $this->apiKey,
             'json' => array_merge($options, $payload),

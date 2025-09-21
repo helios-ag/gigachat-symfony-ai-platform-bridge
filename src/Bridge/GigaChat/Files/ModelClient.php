@@ -25,6 +25,9 @@ final readonly class ModelClient extends AbstractModelClient implements ModelCli
     public function request(Model $model, array|string $payload, array $options = []): RawHttpResult
     {
         $task = $options['task'] ?? Task::FILE_LIST;
+        if (is_string($payload)) {
+            throw new \InvalidArgumentException('Payload must be a string');
+        }
         return match ($task) {
             Task::FILE_DELETE => new RawHttpResult($this->httpClient->request('POST', sprintf("%s/v1/files/%s/delete", self::getBaseUrl(), $payload), [
                 'auth_bearer' => $this->apiKey,
