@@ -12,7 +12,7 @@ final class ResultConverter implements ResultConverterInterface
 {
     public function supports(Model $model): bool
     {
-        return $model instanceof AiCheck;
+        return true;
     }
 
     public function convert(RawResultInterface $result, array $options = []): ObjectResult

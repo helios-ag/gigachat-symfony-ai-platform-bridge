@@ -17,7 +17,17 @@ final readonly class FileItem
     ) {}
 
     /**
-     * @param array<string,mixed> $in
+     * Hydrate DTO from API response array.
+     *
+     * @param array{
+     *     bytes?: int|string,
+     *     created_at?: int|string,
+     *     filename?: string,
+     *     id?: string,
+     *     object?: string,
+     *     purpose?: string,
+     *     access_policy?: string
+     * } $in
      */
     public static function fromArray(array $in): self
     {

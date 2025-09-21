@@ -4,11 +4,13 @@ namespace FM\AI\Platform\Bridge\GigaChat\Files\Output;
 
 final readonly class FileList
 {
-    /** @var FileItem[] */
+    /**
+     * @var list<FileItem>
+     */
     public array $data;
 
     /**
-     * @param FileItem[] $data
+     * @param list<FileItem> $data
      */
     public function __construct(array $data)
     {
@@ -16,7 +18,7 @@ final readonly class FileList
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array{data?: list<array<string,mixed>>} $data
      */
     public static function fromArray(array $data): self
     {

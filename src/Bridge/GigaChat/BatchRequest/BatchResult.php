@@ -20,9 +20,9 @@ final class BatchResult
      *     id: string,
      *     method: string,
      *     status: string,
-     *     request_counts: object{array{total: int}},
+     *     request_counts: array<array{total:int}>,
      *     created_at: string,
-     *     updated_at: string
+     *     updated_at: string,
      * } $data
      */
     public static function fromArray(array $data): self
