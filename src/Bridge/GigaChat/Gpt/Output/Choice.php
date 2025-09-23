@@ -1,28 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FM\AI\Platform\Bridge\GigaChat\Gpt\Output;
 
-final class Choice
+use Webmozart\Assert\Assert;
+
+final readonly class Choice
 {
     public function __construct(
-        public string $category,
-        public int    $characters,
-        public int    $tokens,
-        public array  $aiIntervals,
-    )
-    {
+        public Message $message,
+        public int $index,
+        public string $finishReason,
+    ) {
     }
 
     /**
-     * @param array{category: string, characters: int, tokens: int, ai_intervals: array<array<int>} $data
+     * @param array<string, mixed> $data
+     * @throws \InvalidArgumentException
      */
     public static function fromArray(array $data): self
     {
+        Assert::keyExists($data, 'message');
+        Assert::keyExists($data, 'index');
+        Assert::keyExists($data, 'finish_reason');
+
+        Assert::isArray($data['message']);
+        /** @var array<string, mixed> $msgRaw */
+        $msgRaw = $data['message'];
+
+        Assert::integer($data['index']);
+        Assert::string($data['finish_reason']);
+
         return new self(
-            $data['category'],
-            $data['characters'],
-            $data['tokens'],
-            $data['ai_intervals'],
+            Message::fromArray($msgRaw),
+            $data['index'],
+            $data['finish_reason']
         );
     }
 }
