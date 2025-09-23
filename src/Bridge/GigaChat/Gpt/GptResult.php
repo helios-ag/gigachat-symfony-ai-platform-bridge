@@ -11,6 +11,7 @@ final class GptResult
     /** @var Choice[] */
     public array $choices;
 
+    /** @param list<Choice> $choices */
     public function __construct(
         array $choices,
         public int $created,
