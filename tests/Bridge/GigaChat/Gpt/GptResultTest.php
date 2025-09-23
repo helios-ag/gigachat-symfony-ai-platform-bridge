@@ -5,9 +5,15 @@ declare(strict_types=1);
 namespace FM\AI\Platform\Tests\Bridge\GigaChat\Gpt;
 
 use FM\AI\Platform\Bridge\GigaChat\Gpt\GptResult;
+use FM\AI\Platform\Bridge\GigaChat\Gpt\Output\Usage;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(GptResult::class)]
+#[CoversClass(Usage::class)]
+#[Small]
 final class GptResultTest extends TestCase
 {
     public function testParsesValidJson(): void
@@ -15,24 +21,20 @@ final class GptResultTest extends TestCase
         $data = json_decode($this->sampleJson(), true, 512, JSON_THROW_ON_ERROR);
         $completion = GptResult::fromArray($data);
 
-        // Корневые поля
         $this->assertSame(1678878333, $completion->created);
         $this->assertSame('GigaChat:1.0.26.20', $completion->model);
         $this->assertSame('chat.completion', $completion->object);
 
-        // Usage
         $this->assertSame(1, $completion->usage->promptTokens);
         $this->assertSame(4, $completion->usage->completionTokens);
         $this->assertSame(37, $completion->usage->precachedPromptTokens);
         $this->assertSame(5, $completion->usage->totalTokens);
 
-        // Choices
         $this->assertCount(1, $completion->choices);
         $choice = $completion->choices[0];
         $this->assertSame(0, $choice->index);
         $this->assertSame('stop', $choice->finishReason);
 
-        // Message
         $msg = $choice->message;
         $this->assertSame('assistant', $msg->role);
         $this->assertStringContainsString('GigaChat', $msg->content);
@@ -40,7 +42,6 @@ final class GptResultTest extends TestCase
         $this->assertSame('text2image', $msg->name);
         $this->assertSame('77d3fb14-457a-46ba-937e-8d856156d003', $msg->functionsStateId);
 
-        // Function call
         $this->assertNotNull($msg->functionCall);
         $this->assertSame('string', $msg->functionCall->name);
         $this->assertSame([], $msg->functionCall->arguments);

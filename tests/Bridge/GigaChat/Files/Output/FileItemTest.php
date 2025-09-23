@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace FM\AI\Platform\Tests\Bridge\GigaChat\Files\Output;
 
 use FM\AI\Platform\Bridge\GigaChat\Files\Output\FileItem;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(FileItem::class)]
 final class FileItemTest extends TestCase
 {
     public function testFromArrayAndToArrayWithAllFields(): void

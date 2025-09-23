@@ -6,8 +6,10 @@ namespace FM\AI\Platform\Tests\Bridge\GigaChat\Files\Output;
 
 use FM\AI\Platform\Bridge\GigaChat\Files\Output\FileItem;
 use FM\AI\Platform\Bridge\GigaChat\Files\Output\FileList;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(FileList::class)]
 final class FileListTest extends TestCase
 {
     public function testFromArrayWithValidData(): void

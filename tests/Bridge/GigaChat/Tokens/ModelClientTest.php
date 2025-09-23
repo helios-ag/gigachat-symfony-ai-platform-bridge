@@ -14,7 +14,6 @@ use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\ResponseInterface as HttpResponse;
 
-
 #[CoversClass(ModelClient::class)]
 #[Small]
 final class ModelClientTest extends TestCase

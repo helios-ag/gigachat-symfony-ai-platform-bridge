@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace FM\AI\Platform\Tests\Bridge\GigaChat\AiCheck;
 
 use FM\AI\Platform\Bridge\GigaChat\AiCheck\AiCheckResult;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
+#[Small]
+#[CoversClass(AiCheckResult::class)]
 final class AiCheckResultTest extends TestCase
 {
     public function testFromArrayCreatesExpectedObject(): void
