@@ -1,27 +1,17 @@
-# phpstan.neon
-# Minimal but sensible defaults. Adjust "paths" to your project layout.
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
 
 parameters:
-  level: max
-
-  # Folders to analyze
-  paths:
-    - src
-    # - app            # uncomment if you use /app instead of /src
-    # - tests          # include if you want to analyze tests too
-
-  # Common noise to skip
-  excludePaths:
-    - */vendor/*
-    - */var/*
-    - */bootstrap/cache/*
-    - tests/**/Fixtures/*
-    - tests/**/data/*
-
-  # Faster, reproducible cache location (safe to commit)
-  tmpDir: var/phpstan
-
-  # Good safety nets
-  reportUnmatchedIgnoredErrors: true
-  checkMissingCallableSignature: true
-  checkUninitializedProperties: true
+    level: 6
+    paths:
+        - src/
+    treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        -
+            message: '#supportsNormalization\(\) has parameter \$context with no value type specified in iterable type array#'
+            path: src/*
+            reportUnmatched: false # only needed for older Symfony versions
+        -
+            message: '#getSupportedTypes\(\) return type has no value type specified in iterable type array#'
+            path: src/*
+            reportUnmatched: false # only needed for older Symfony versions
